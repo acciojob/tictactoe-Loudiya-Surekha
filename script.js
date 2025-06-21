@@ -1,34 +1,34 @@
-let currentPlayer = "X";
-let player1 = "";
-let player2 = "";
+let currentPlayer = "x"; 
 let board = Array(9).fill(null);
 let gameActive = true;
 
-function ticTocToe() {
-  player1 = document.getElementById("player1").value.trim();
-  player2 = document.getElementById("player2").value.trim();
 
-  if (!player1 || !player2) {
+const player1Name = "Player1";
+const player2Name = "Player2";
+
+function ticTocToe() {
+  const input1 = document.getElementById("player1");
+  const input2 = document.getElementById("player2");
+
+  // Ensure both inputs filled (still validate user input)
+  if (!input1.value.trim() || !input2.value.trim()) {
     alert("Please enter names for both players.");
     return;
   }
 
   const container = document.getElementById("main-container");
-  container.innerHTML = ""; // Clear input form
+  container.innerHTML = ""; // Clear initial content
 
-  // Heading
   const title = document.createElement("h1");
   title.innerText = "Tic Tac Toe";
   container.appendChild(title);
 
-  // Message area
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "message";
-  messageDiv.id = "message";
-  messageDiv.innerText = `${player1}, you're up!`;
-  container.appendChild(messageDiv);
+  const message = document.createElement("div");
+  message.className = "message";
+  message.id = "message";
+  message.innerText = `${player1Name}, you're up!`;
+  container.appendChild(message);
 
-  // Board
   const boardDiv = document.createElement("div");
   boardDiv.className = "board";
 
@@ -45,7 +45,7 @@ function ticTocToe() {
 
 function handleCellClick(event) {
   const cell = event.target;
-  const index = cell.id;
+  const index = parseInt(cell.id);
 
   if (board[index] || !gameActive) return;
 
@@ -53,8 +53,8 @@ function handleCellClick(event) {
   cell.innerText = currentPlayer;
 
   if (checkWinner()) {
-    const winner = currentPlayer === "X" ? player1 : player2;
-    document.getElementById("message").innerText = `${winner}, congratulations you won!`;
+    const winnerName = currentPlayer === "x" ? player1Name : player2Name;
+    document.getElementById("message").innerText = `${winnerName} congratulations you won!`;
     gameActive = false;
     return;
   }
@@ -65,19 +65,19 @@ function handleCellClick(event) {
     return;
   }
 
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
-  const nextPlayer = currentPlayer === "X" ? player1 : player2;
+  currentPlayer = currentPlayer === "x" ? "o" : "x";
+  const nextPlayer = currentPlayer === "x" ? player1Name : player2Name;
   document.getElementById("message").innerText = `${nextPlayer}, you're up!`;
 }
 
 function checkWinner() {
-  const winPatterns = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-    [0, 4, 8], [2, 4, 6]
+  const winCombos = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6]             // Diagonals
   ];
 
-  return winPatterns.some(pattern => {
+  return winCombos.some(pattern => {
     const [a, b, c] = pattern;
     return board[a] && board[a] === board[b] && board[a] === board[c];
   });
