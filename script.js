@@ -5,8 +5,8 @@ let board = Array(9).fill(null);
 let gameActive = true;
 
 function ticTocToe() {
-  player1 = document.getElementById("player-1").value.trim();
-  player2 = document.getElementById("player-2").value.trim();
+  player1 = document.getElementById("player1").value.trim();
+  player2 = document.getElementById("player2").value.trim();
 
   if (!player1 || !player2) {
     alert("Please enter names for both players.");
@@ -14,14 +14,14 @@ function ticTocToe() {
   }
 
   const container = document.getElementById("main-container");
-  container.innerHTML = ""; // Clear the form
+  container.innerHTML = ""; // Clear input form
 
-  // Title
+  // Heading
   const title = document.createElement("h1");
   title.innerText = "Tic Tac Toe";
   container.appendChild(title);
 
-  // Message
+  // Message area
   const messageDiv = document.createElement("div");
   messageDiv.className = "message";
   messageDiv.id = "message";
@@ -72,9 +72,9 @@ function handleCellClick(event) {
 
 function checkWinner() {
   const winPatterns = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-    [0, 4, 8], [2, 4, 6]             // Diagonals
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
   ];
 
   return winPatterns.some(pattern => {
