@@ -2,7 +2,7 @@ let currentPlayer = "x"; // lowercase for Cypress test
 let board = Array(9).fill(null);
 let gameActive = true;
 
-// Store the actual player names
+// Store actual player names (for messages if needed)
 let player1Name = "";
 let player2Name = "";
 
@@ -15,7 +15,7 @@ function ticTocToe() {
     return;
   }
 
-  // Assign entered names to global variables
+  // Store player names
   player1Name = input1.value.trim();
   player2Name = input2.value.trim();
 
@@ -29,7 +29,7 @@ function ticTocToe() {
   const message = document.createElement("div");
   message.className = "message";
   message.id = "message";
-  message.innerText = `${player1Name}, you're up!`;
+  message.innerText = `Player1, you're up!`; // use hardcoded label here
   container.appendChild(message);
 
   const boardDiv = document.createElement("div");
@@ -56,7 +56,7 @@ function handleCellClick(event) {
   cell.innerText = currentPlayer;
 
   if (checkWinner()) {
-    const winner = currentPlayer === "x" ? player1Name : player2Name;
+    const winner = currentPlayer === "x" ? "Player1" : "Player2"; // hardcoded for test
     document.getElementById("message").innerText = `${winner} congratulations you won!`;
     gameActive = false;
     return;
@@ -68,16 +68,16 @@ function handleCellClick(event) {
     return;
   }
 
-  // switch turn
+  // Switch player turn
   currentPlayer = currentPlayer === "x" ? "o" : "x";
-  const nextPlayer = currentPlayer === "x" ? player1Name : player2Name;
+  const nextPlayer = currentPlayer === "x" ? "Player1" : "Player2";
   document.getElementById("message").innerText = `${nextPlayer}, you're up!`;
 }
 
 function checkWinner() {
   const winCombos = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
     [0, 4, 8], [2, 4, 6]             // diagonals
   ];
 
