@@ -14,11 +14,9 @@ function ticTocToe() {
     return;
   }
 
-  // Store actual names (optional — for UX if needed)
   player1Name = input1.value.trim();
   player2Name = input2.value.trim();
 
-  // Reset game state
   board = Array(9).fill(null);
   gameActive = true;
   currentPlayer = "x";
@@ -33,7 +31,7 @@ function ticTocToe() {
   const message = document.createElement("div");
   message.className = "message";
   message.id = "message";
-  message.innerText = `Player1, you're up!`; // MUST use Player1
+  message.innerText = `Player1, you're up!`;
   container.appendChild(message);
 
   const boardDiv = document.createElement("div");
@@ -59,13 +57,10 @@ function handleCellClick(event) {
   board[index] = currentPlayer;
   cell.innerText = currentPlayer;
 
-  console.log(board);
-  console.log(`Current Player: ${currentPlayer}`);
-
   if (checkWinner()) {
-    const winner = currentPlayer === "x" ? "Player1" : "Player2"; // ✅ Hardcoded for test
-    const winMessage = `${winner} congratulations you won!`;
-    console.log(winMessage); // ✅ Debug log
+    const winnerLabel = currentPlayer === "x" ? "Player1" : "Player2";
+    const winnerName = currentPlayer === "x" ? player1Name : player2Name;
+    const winMessage = `${winnerLabel} congratulations you won! (${winnerName})`;
     document.getElementById("message").innerText = winMessage;
     gameActive = false;
     return;
@@ -78,8 +73,8 @@ function handleCellClick(event) {
   }
 
   currentPlayer = currentPlayer === "x" ? "o" : "x";
-  const nextPlayer = currentPlayer === "x" ? "Player1" : "Player2";
-  document.getElementById("message").innerText = `${nextPlayer}, you're up!`;
+  const nextPlayerLabel = currentPlayer === "x" ? "Player1" : "Player2";
+  document.getElementById("message").innerText = `${nextPlayerLabel}, you're up!`;
 }
 
 function checkWinner() {
