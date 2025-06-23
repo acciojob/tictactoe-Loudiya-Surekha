@@ -2,9 +2,9 @@ let currentPlayer = "x"; // lowercase for Cypress test
 let board = Array(9).fill(null);
 let gameActive = true;
 
-// Use fixed player labels as required by test
-const player1Label = "Player1";
-const player2Label = "Player2";
+// Store the actual player names
+let player1Name = "";
+let player2Name = "";
 
 function ticTocToe() {
   const input1 = document.getElementById("player1");
@@ -14,6 +14,10 @@ function ticTocToe() {
     alert("Please enter names for both players.");
     return;
   }
+
+  // Assign entered names to global variables
+  player1Name = input1.value.trim();
+  player2Name = input2.value.trim();
 
   const container = document.getElementById("main-container");
   container.innerHTML = ""; // clear form
@@ -25,7 +29,7 @@ function ticTocToe() {
   const message = document.createElement("div");
   message.className = "message";
   message.id = "message";
-  message.innerText = `${player1Label}, you're up!`;
+  message.innerText = `${player1Name}, you're up!`;
   container.appendChild(message);
 
   const boardDiv = document.createElement("div");
@@ -52,7 +56,7 @@ function handleCellClick(event) {
   cell.innerText = currentPlayer;
 
   if (checkWinner()) {
-    const winner = currentPlayer === "x" ? player1Label : player2Label;
+    const winner = currentPlayer === "x" ? player1Name : player2Name;
     document.getElementById("message").innerText = `${winner} congratulations you won!`;
     gameActive = false;
     return;
@@ -66,7 +70,7 @@ function handleCellClick(event) {
 
   // switch turn
   currentPlayer = currentPlayer === "x" ? "o" : "x";
-  const nextPlayer = currentPlayer === "x" ? player1Label : player2Label;
+  const nextPlayer = currentPlayer === "x" ? player1Name : player2Name;
   document.getElementById("message").innerText = `${nextPlayer}, you're up!`;
 }
 
