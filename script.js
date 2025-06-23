@@ -1,4 +1,4 @@
-let currentPlayer = "x"; 
+let currentPlayer = "x";
 let board = Array(9).fill(null);
 let gameActive = true;
 
@@ -59,8 +59,7 @@ function handleCellClick(event) {
 
   if (checkWinner()) {
     const winnerLabel = currentPlayer === "x" ? "Player1" : "Player2";
-    const winnerName = currentPlayer === "x" ? player1Name : player2Name;
-    const winMessage = `${winnerLabel} congratulations you won! (${winnerName})`;
+    const winMessage = `${winnerLabel} congratulations you won!`;
     document.getElementById("message").innerText = winMessage;
     gameActive = false;
     return;
@@ -79,9 +78,9 @@ function handleCellClick(event) {
 
 function checkWinner() {
   const winCombos = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-    [0, 4, 8], [2, 4, 6]             // diagonals
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
   ];
 
   return winCombos.some(pattern => {
