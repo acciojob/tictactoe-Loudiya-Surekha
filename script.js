@@ -58,7 +58,7 @@ function handleCellClick(event) {
   cell.innerText = currentPlayer;
 
   if (checkWinner()) {
-    const winnerLabel = currentPlayer === "x" ? "Player1" : "Player2";
+    const winnerLabel = currentPlayer === "x" ? player1Name : player2Name;
     const winMessage = `${winnerLabel} congratulations you won!`;
     document.getElementById("message").innerText = winMessage;
     gameActive = false;
@@ -72,7 +72,7 @@ function handleCellClick(event) {
   }
 
   currentPlayer = currentPlayer === "x" ? "o" : "x";
-  const nextPlayerLabel = currentPlayer === "x" ? "Player1" : "Player2";
+  const nextPlayerLabel = currentPlayer === "x" ? player1Name : player2Name;
   document.getElementById("message").innerText = `${nextPlayerLabel}, you're up!`;
 }
 
